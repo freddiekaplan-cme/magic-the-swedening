@@ -24,14 +24,15 @@ const Scryfall = () => {
 
 	useEffect(() => {
 		apiFunction()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const search = () => {
-		apiFunction() // Call the API function when the "Search" button is clicked
+		apiFunction()
 	}
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchValue(event.target.value) // Update the searchValue state as the user types
+		setSearchValue(event.target.value)
 	}
 
 	return (
