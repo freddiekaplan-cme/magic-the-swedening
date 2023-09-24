@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
+import "../../App.css"
 
-interface Scryfall {
+interface NameProp {
+	cardName: (name: string | null) => void
+}
+interface ScryfallProps {
 	data: {
 		name: string
 		type_line: string
@@ -16,14 +20,11 @@ interface Scryfall {
 	}[]
 }
 
-const Scryfall = () => {
-	const [data, setData] = useState<Scryfall | null>(null)
+const Scryfall = ({ cardName }: NameProp) => {
+	const [data, setData] = useState<ScryfallProps | null>(null)
 	const [name, setName] = useState<string | null>(null)
 	const [type, setType] = useState<string | null>(null)
 	const [text, setText] = useState<string | null>(null)
-	// const [doubleFacedCardImg, setDoubleFacedCardImg] = useState<
-	// 	string | undefined
-	// >("")
 	const [img, setImg] = useState<string | undefined>("")
 	const [searchValue, setSearchValue] = useState<string>("obsessive search")
 
@@ -53,8 +54,10 @@ const Scryfall = () => {
 				) {
 					setImg(jsonData.data[0].card_faces[0].image_uris.normal)
 				} else {
-					setImg("") // Set to empty string if no image URL is found
+					setImg("")
 				}
+
+				cardName(jsonData.data[0].name)
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)
@@ -92,7 +95,7 @@ const Scryfall = () => {
 			<div>
 				{data && img !== "" ? (
 					<div>
-						<img src={img} />
+						<img className="image" src={img} />
 					</div>
 				) : (
 					<p>No image could be loaded</p>
