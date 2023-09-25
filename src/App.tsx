@@ -4,19 +4,54 @@ import Scryfall from "./api/scryfall"
 import TranslateText from "./components/TranslateText"
 
 function App() {
-	const [receivedName, setReceivedName] = useState<string | null>(null)
+	const [apiCardName, setApiCardName] = useState<string | null>(null)
+	const [apiCardType, setApiCardType] = useState<string | null>(null)
+	const [apiCardText, setApiCardText] = useState<string | null>(null)
 
-	const handleNameReceived = (name: string | null) => {
-		setReceivedName(name)
+	const handleCardName = (name: string | null) => {
+		setApiCardName(name)
+	}
+	const handleCardType = (type: string | null) => {
+		setApiCardType(type)
+	}
+	const handleCardText = (text: string | null) => {
+		setApiCardText(text)
 	}
 
 	return (
 		<div>
-			<div>{receivedName && <p>Received Name: {receivedName}</p>}</div>
-
-			<Scryfall cardName={handleNameReceived} />
-
-			<TranslateText />
+			<h1>Magic The Swedening</h1>
+			<p>Översätt ett Magic the Gathering-kort till svenska!</p>
+			<Scryfall
+				cardName={handleCardName}
+				cardType={handleCardType}
+				cardText={handleCardText}
+			/>
+			{apiCardName && <h2>{apiCardName}</h2>}
+			<div>
+				{apiCardType && (
+					<p>
+						{/* Kortnamn:{" "} */}
+						<TranslateText textToTranslate={apiCardName} />
+					</p>
+				)}
+			</div>
+			<div>
+				{apiCardType && (
+					<p>
+						{/* Korttyp:  */}
+						<TranslateText textToTranslate={apiCardType} />
+					</p>
+				)}
+			</div>
+			<div>
+				{apiCardType && (
+					<p>
+						{/* Korttext:{" "} */}
+						<TranslateText textToTranslate={apiCardText} />
+					</p>
+				)}
+			</div>
 		</div>
 	)
 }

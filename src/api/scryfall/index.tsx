@@ -3,61 +3,56 @@ import "../../App.css"
 
 interface NameProp {
 	cardName: (name: string | null) => void
+	cardType: (name: string | null) => void
+	cardText: (name: string | null) => void
 }
-interface ScryfallProps {
-	data: {
-		name: string
-		type_line: string
-		oracle_text: string
+
+interface CardData {
+	name: string
+	type_line: string
+	oracle_text: string
+	image_uris: {
+		normal: string | undefined
+	}
+	card_faces: {
 		image_uris: {
 			normal: string | undefined
-		}
-		card_faces: {
-			image_uris: {
-				normal: string | undefined
-			}
 		}
 	}[]
 }
 
-const Scryfall = ({ cardName }: NameProp) => {
-	const [data, setData] = useState<ScryfallProps | null>(null)
-	const [name, setName] = useState<string | null>(null)
-	const [type, setType] = useState<string | null>(null)
-	const [text, setText] = useState<string | null>(null)
+const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 	const [img, setImg] = useState<string | undefined>("")
-	const [searchValue, setSearchValue] = useState<string>("obsessive search")
+	const [searchValue, setSearchValue] = useState<string>("")
 
-	const apiFetch = async () => {
+	const getRandomCard = async () => {
 		try {
 			const response = await fetch(
-				"https://api.scryfall.com/cards/search?q=" + searchValue,
+				"https://api.scryfall.com/cards/random",
 			)
 			const jsonData = await response.json()
-			setData(jsonData)
 
-			if (jsonData) {
-				setName(jsonData.data[0].name)
-				setType(jsonData.data[0].type_line)
-				setText(jsonData.data[0].oracle_text)
+			if (jsonData && jsonData.name) {
+				const randomName = jsonData.name
+				setSearchValue(randomName)
+				cardName(randomName)
+				cardType(jsonData.type_line)
+				cardText(jsonData.oracle_text)
 
 				if (
-					jsonData.data[0].image_uris &&
-					jsonData.data[0].image_uris.normal !== undefined
+					jsonData.image_uris &&
+					jsonData.image_uris.normal !== undefined
 				) {
-					setImg(jsonData.data[0].image_uris.normal)
+					setImg(jsonData.image_uris.normal)
 				} else if (
-					jsonData.data[0].card_faces &&
-					jsonData.data[0].card_faces[0].image_uris &&
-					jsonData.data[0].card_faces[0].image_uris.normal !==
-						undefined
+					jsonData.card_faces &&
+					jsonData.card_faces[0].image_uris &&
+					jsonData.card_faces[0].image_uris.normal !== undefined
 				) {
-					setImg(jsonData.data[0].card_faces[0].image_uris.normal)
+					setImg(jsonData.card_faces[0].image_uris.normal)
 				} else {
 					setImg("")
 				}
-
-				cardName(jsonData.data[0].name)
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)
@@ -65,12 +60,47 @@ const Scryfall = ({ cardName }: NameProp) => {
 	}
 
 	useEffect(() => {
-		apiFetch()
+		getRandomCard()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	const searchForCard = async () => {
+		try {
+			const response = await fetch(
+				"https://api.scryfall.com/cards/search?q=" + searchValue,
+			)
+			const jsonData = await response.json()
+
+			if (jsonData && jsonData.data && jsonData.data.length > 0) {
+				const cardData: CardData = jsonData.data[0]
+				cardName(cardData.name)
+				cardType(cardData.type_line)
+				cardText(cardData.oracle_text)
+
+				if (
+					cardData.image_uris &&
+					cardData.image_uris.normal !== undefined
+				) {
+					setImg(cardData.image_uris.normal)
+				} else if (
+					cardData.card_faces &&
+					cardData.card_faces[0].image_uris &&
+					cardData.card_faces[0].image_uris.normal !== undefined
+				) {
+					setImg(cardData.card_faces[0].image_uris.normal)
+				} else {
+					setImg("")
+				}
+			}
+		} catch (error) {
+			console.error("Error fetching data:", error)
+		}
+	}
+
 	const search = () => {
-		apiFetch()
+		if (searchValue) {
+			searchForCard()
+		}
 	}
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,25 +110,26 @@ const Scryfall = ({ cardName }: NameProp) => {
 	return (
 		<div>
 			<div>
-				<label htmlFor="searchInput">Search for a Magic card</label>
+				<label htmlFor="searchInput">Kortnamn: </label>
 				<input
 					type="text"
 					id="searchInput"
 					value={searchValue}
 					onChange={handleInputChange}
 				></input>
-				<button onClick={search}>Search</button>
+				<button onClick={search}>Sök</button>
+				<p>
+					<button onClick={getRandomCard}>Slumpa kort</button>
+				</p>
 			</div>
-			{data ? <div>Namn: {name}</div> : <p>Loading...</p>}
-			{data ? <div>Typ: {type}</div> : <p>Loading...</p>}
-			{data ? <div>Text: {text}</div> : <p>Loading...</p>}
+
 			<div>
-				{data && img !== "" ? (
+				{img !== "" ? (
 					<div>
-						<img className="image" src={img} />
+						<img className="image" src={img} alt="Card" />
 					</div>
 				) : (
-					<p>No image could be loaded</p>
+					<p>Loading image...</p>
 				)}
 			</div>
 		</div>

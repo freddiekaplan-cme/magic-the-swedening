@@ -1,41 +1,41 @@
-import React, { useState } from "react"
+import { useState, useEffect } from "react"
 import translate from "translate"
 
-const TranslateText: React.FC = () => {
-	const [textToTranslate, setTextToTranslate] = useState("nimble")
+interface TranslateTextProps {
+	textToTranslate: string | null
+}
+
+const TranslateText: React.FC<TranslateTextProps> = (props) => {
 	const [translatedText, setTranslatedText] = useState<string | null>(null)
 
-	const translateText = async () => {
-		try {
-			const result: string = await translate(textToTranslate, {
-				to: "sv",
-			})
-			setTranslatedText(result)
-		} catch (error) {
-			console.error("Error translating text:", error)
+	useEffect(() => {
+		const translateText = async () => {
+			try {
+				if (props.textToTranslate) {
+					const result: string = await translate(
+						props.textToTranslate,
+						{
+							to: "sv",
+						},
+					)
+					setTranslatedText(result)
+				}
+			} catch (error) {
+				console.error("Error translating text:", error)
+			}
 		}
-	}
+
+		if (props.textToTranslate) {
+			translateText()
+		}
+	}, [props.textToTranslate])
 
 	return (
-		<div>
-			<h1>Translation Example</h1>
-			<div>
-				<label htmlFor="textToTranslate">Text to Translate:</label>
-				<input
-					type="text"
-					id="textToTranslate"
-					value={textToTranslate}
-					onChange={(e) => setTextToTranslate(e.target.value)}
-				/>
-			</div>
-			<button onClick={translateText}>Translate</button>
-			{translatedText !== null && (
-				<div>
-					<p>Translated Text:</p>
-					<p>{translatedText}</p>
-				</div>
-			)}
-		</div>
+		<>
+			<span>
+				{translatedText !== null && <span>{translatedText}</span>}
+			</span>
+		</>
 	)
 }
 
