@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import styles from "./scryfall.module.scss"
 
-interface NameProp {
-	cardName: (name: string | null) => void
-	cardType: (name: string | null) => void
-	cardText: (name: string | null) => void
-}
+import { ScryfallContextType } from "../../utils/types"
+import { ScryfallContext } from "../../utils/contexts"
+
+// interface NameProp {
+// 	cardName: (name: string | null) => void
+// 	cardType: (name: string | null) => void
+// 	cardText: (name: string | null) => void
+// }
 
 interface CardData {
 	name: string
@@ -21,7 +24,11 @@ interface CardData {
 	}[]
 }
 
-const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
+const Scryfall = () => {
+	const { scryfall, setScryfall } = useContext(
+		ScryfallContext,
+	) as unknown as ScryfallContextType
+
 	const [img, setImg] = useState<string | undefined>("")
 	const [searchValue, setSearchValue] = useState<string>("")
 
@@ -30,26 +37,33 @@ const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 			const response = await fetch(
 				"https://api.scryfall.com/cards/random",
 			)
-			const jsonData = await response.json()
+			const cardData = await response.json()
 
-			if (jsonData && jsonData.name) {
-				const randomName = jsonData.name
-				setSearchValue(randomName)
-				cardName(randomName)
-				cardType(jsonData.type_line)
-				cardText(jsonData.oracle_text)
+			if (cardData && cardData.name) {
+				// const randomName = cardData.name
+				// cardName(randomName)
+				// cardType(jsonData.type_line)
+				// cardText(jsonData.oracle_text)
+
+				const cardName = cardData.name
+				const cardType = cardData.type_line
+				const cardText = cardData.oracle_text
+
+				setScryfall({ cardName, cardType, cardText })
+
+				// setSearchValue(cardName)
 
 				if (
-					jsonData.image_uris &&
-					jsonData.image_uris.normal !== undefined
+					cardData.image_uris &&
+					cardData.image_uris.normal !== undefined
 				) {
-					setImg(jsonData.image_uris.normal)
+					setImg(cardData.image_uris.normal)
 				} else if (
-					jsonData.card_faces &&
-					jsonData.card_faces[0].image_uris &&
-					jsonData.card_faces[0].image_uris.normal !== undefined
+					cardData.card_faces &&
+					cardData.card_faces[0].image_uris &&
+					cardData.card_faces[0].image_uris.normal !== undefined
 				) {
-					setImg(jsonData.card_faces[0].image_uris.normal)
+					setImg(cardData.card_faces[0].image_uris.normal)
 				} else {
 					setImg("")
 				}
@@ -73,9 +87,19 @@ const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 
 			if (jsonData && jsonData.data && jsonData.data.length > 0) {
 				const cardData: CardData = jsonData.data[0]
-				cardName(cardData.name)
-				cardType(cardData.type_line)
-				cardText(cardData.oracle_text)
+				// cardName(cardData.name)
+				// cardType(cardData.type_line)
+				// cardText(cardData.oracle_text)
+
+				const cardName = cardData.name
+				const cardType = cardData.type_line
+				const cardText = cardData.oracle_text
+
+				setScryfall({ cardName, cardType, cardText })
+
+				// if (scryfall) {
+				// 	console.log(scryfall.cardName)
+				// }
 
 				if (
 					cardData.image_uris &&
@@ -125,12 +149,13 @@ const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 
 			<div>
 				{img !== "" ? (
-					<div>
+					<div className={styles["scryfall__image"]}>
 						<img
-							className={styles["scryfall__image"]}
+							className={styles["scryfall__image--img"]}
 							src={img}
-							alt="Card"
+							alt={scryfall?.cardName}
 						/>
+						<h2>{scryfall?.cardName}</h2>
 					</div>
 				) : (
 					<p>Loading image...</p>

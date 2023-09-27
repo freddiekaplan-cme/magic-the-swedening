@@ -1,0 +1,9 @@
+@import "../../App.scss";
+
+.header {
+	@include flexbox($align: center);
+
+	&__paragraph {
+		@include flexbox($align: flex-start);
+	}
+}

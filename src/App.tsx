@@ -1,58 +1,45 @@
 import { useState } from "react"
-import "./App.scss"
+import { ScryfallContext } from "./utils/contexts"
+import { ScryfallType } from "./utils/types"
+
 import Scryfall from "./components/Scryfall"
 import TranslateText from "./components/TranslateText"
+import Header from "./components/Header"
+
+import "./App.scss"
 
 function App() {
-	const [apiCardName, setApiCardName] = useState<string | null>(null)
-	const [apiCardType, setApiCardType] = useState<string | null>(null)
-	const [apiCardText, setApiCardText] = useState<string | null>(null)
-
-	const handleCardName = (name: string | null) => {
-		setApiCardName(name)
-	}
-	const handleCardType = (type: string | null) => {
-		setApiCardType(type)
-	}
-	const handleCardText = (text: string | null) => {
-		setApiCardText(text)
-	}
+	const [scryfall, setScryfall] = useState<ScryfallType | null>(null)
 
 	return (
-		<div>
-			<h1>Magic The Swedening</h1>
-			<p>Översätt ett Magic the Gathering-kort till svenska!</p>
-			<Scryfall
-				cardName={handleCardName}
-				cardType={handleCardType}
-				cardText={handleCardText}
-			/>
-			{apiCardName && <h2>{apiCardName}</h2>}
-			<div>
-				{apiCardType && (
-					<p>
-						{/* Kortnamn:{" "} */}
-						<TranslateText textToTranslate={apiCardName} />
-					</p>
-				)}
-			</div>
-			<div>
-				{apiCardType && (
-					<p>
-						{/* Korttyp:  */}
-						<TranslateText textToTranslate={apiCardType} />
-					</p>
-				)}
-			</div>
-			<div>
-				{apiCardType && (
-					<p>
-						{/* Korttext:{" "} */}
-						<TranslateText textToTranslate={apiCardText} />
-					</p>
-				)}
-			</div>
-		</div>
+		<>
+			<ScryfallContext.Provider value={{ scryfall, setScryfall }}>
+				<div className="container">
+					<Header />
+					<Scryfall />
+
+					{scryfall && (
+						<div>
+							<p>
+								<TranslateText
+									textToTranslate={scryfall.cardName}
+								/>
+							</p>
+							<p>
+								<TranslateText
+									textToTranslate={scryfall.cardType}
+								/>
+							</p>
+							<p>
+								<TranslateText
+									textToTranslate={scryfall.cardText}
+								/>
+							</p>
+						</div>
+					)}
+				</div>
+			</ScryfallContext.Provider>
+		</>
 	)
 }
 
