@@ -1,6 +1,6 @@
 import { useState } from "react"
-import "./App.css"
-import Scryfall from "./api/scryfall"
+import "./App.scss"
+import Scryfall from "./components/Scryfall"
 import TranslateText from "./components/TranslateText"
 
 function App() {

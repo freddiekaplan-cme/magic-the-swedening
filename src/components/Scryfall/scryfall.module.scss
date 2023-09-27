@@ -1,0 +1,10 @@
+@import "../../App.scss";
+
+.scryfall {
+	// @include flexbox(column);
+
+	&__image {
+		margin-top: 2rem;
+		width: 80vw;
+	}
+}

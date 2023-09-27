@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "../../App.css"
+import styles from "./scryfall.module.scss"
 
 interface NameProp {
 	cardName: (name: string | null) => void
@@ -108,7 +108,7 @@ const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 	}
 
 	return (
-		<div>
+		<div className={styles.scryfall}>
 			<div>
 				<label htmlFor="searchInput">Kortnamn: </label>
 				<input
@@ -126,7 +126,11 @@ const Scryfall = ({ cardName, cardType, cardText }: NameProp) => {
 			<div>
 				{img !== "" ? (
 					<div>
-						<img className="image" src={img} alt="Card" />
+						<img
+							className={styles["scryfall__image"]}
+							src={img}
+							alt="Card"
+						/>
 					</div>
 				) : (
 					<p>Loading image...</p>
