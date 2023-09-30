@@ -1,0 +1,50 @@
+@import "../../App.scss";
+
+.footer {
+	@include flexbox($align: center);
+
+	background-color: $primary;
+	margin-top: $indent__xl;
+	padding: $indent__l 0 $indent__xl 0;
+	width: 100%;
+
+	&__container {
+		@include flexbox($direction: column, $align: flex-start);
+
+		@include desktop {
+			@include flexbox($direction: row, $align: flex-start);
+			max-width: 65vw;
+		}
+	}
+
+	&__column {
+		@include flexbox($align: flex-start);
+
+		justify-content: center;
+		width: 100vw;
+
+		h4,
+		div {
+			margin-bottom: 0;
+			padding: 0 $indent__l;
+		}
+
+		a,
+		a:visited,
+		a:active {
+			color: #000;
+			text-decoration: none;
+		}
+
+		@include desktop {
+			@include flexbox($align: flex-start, $direction: column);
+
+			width: 50vw;
+
+			h4,
+			div {
+				padding-right: $indent__xs;
+			}
+		}
+	}
+}

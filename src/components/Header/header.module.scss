@@ -2,6 +2,25 @@
 
 .header {
 	@include flexbox($align: center);
+	color: $primary;
+
+	&__title {
+		font: {
+			family: $font-garamond;
+			size: 48px;
+			weight: 700;
+		}
+		margin: 0;
+
+		&__subtitle {
+			font: {
+				family: $font-garamond;
+				size: 32px;
+				weight: 700;
+			}
+			margin: 0;
+		}
+	}
 
 	&__paragraph {
 		@include flexbox($align: flex-start);

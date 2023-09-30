@@ -1,12 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap");
+
 // Spacing
 
 $indent__base: 16px;
-
+$indent__xs: $indent__base * 0.25; // 4px
 $indent__s: $indent__base * 0.5; // 8px
 $indent__m: $indent__base * 1.5; // 24px
 $indent__l: $indent__base * 2; // 32px
 $indent__xl: $indent__base * 4; // 64px
 
-//BreakPoints
+$max__width: 400px;
+
+// BreakPoints
 
 $desktop: 640px;
+
+// Fonts
+
+$font-jost: "Jost", sans-serif;
+$font-garamond: "Cormorant Garamond", serif;
+
+// Colors
+
+$primary: #9e6240;
+$accent: #dea47e;

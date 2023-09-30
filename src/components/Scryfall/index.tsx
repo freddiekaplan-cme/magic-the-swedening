@@ -4,18 +4,13 @@ import styles from "./scryfall.module.scss"
 import { ScryfallContextType } from "../../utils/types"
 import { ScryfallContext } from "../../utils/contexts"
 
-// interface NameProp {
-// 	cardName: (name: string | null) => void
-// 	cardType: (name: string | null) => void
-// 	cardText: (name: string | null) => void
-// }
-
 interface CardData {
 	name: string
 	type_line: string
 	oracle_text: string
 	image_uris: {
 		normal: string | undefined
+		// art_crop: string | undefined
 	}
 	card_faces: {
 		image_uris: {
@@ -27,9 +22,10 @@ interface CardData {
 const Scryfall = () => {
 	const { scryfall, setScryfall } = useContext(
 		ScryfallContext,
-	) as unknown as ScryfallContextType
+	) as ScryfallContextType
 
 	const [img, setImg] = useState<string | undefined>("")
+	const [cardInfo, setCardInfo] = useState<boolean>(false)
 	const [searchValue, setSearchValue] = useState<string>("")
 
 	const getRandomCard = async () => {
@@ -40,18 +36,11 @@ const Scryfall = () => {
 			const cardData = await response.json()
 
 			if (cardData && cardData.name) {
-				// const randomName = cardData.name
-				// cardName(randomName)
-				// cardType(jsonData.type_line)
-				// cardText(jsonData.oracle_text)
-
 				const cardName = cardData.name
 				const cardType = cardData.type_line
 				const cardText = cardData.oracle_text
 
 				setScryfall({ cardName, cardType, cardText })
-
-				// setSearchValue(cardName)
 
 				if (
 					cardData.image_uris &&
@@ -87,19 +76,12 @@ const Scryfall = () => {
 
 			if (jsonData && jsonData.data && jsonData.data.length > 0) {
 				const cardData: CardData = jsonData.data[0]
-				// cardName(cardData.name)
-				// cardType(cardData.type_line)
-				// cardText(cardData.oracle_text)
-
 				const cardName = cardData.name
 				const cardType = cardData.type_line
 				const cardText = cardData.oracle_text
+				// const cardCrop = cardData.image_uris.art_crop
 
 				setScryfall({ cardName, cardType, cardText })
-
-				// if (scryfall) {
-				// 	console.log(scryfall.cardName)
-				// }
 
 				if (
 					cardData.image_uris &&
@@ -131,31 +113,83 @@ const Scryfall = () => {
 		setSearchValue(event.target.value)
 	}
 
+	const toggleInfo = (): void => {
+		setCardInfo(!cardInfo)
+	}
+
 	return (
 		<div className={styles.scryfall}>
-			<div>
-				<label htmlFor="searchInput">Kortnamn: </label>
-				<input
-					type="text"
-					id="searchInput"
-					value={searchValue}
-					onChange={handleInputChange}
-				></input>
-				<button onClick={search}>Sök</button>
-				<p>
-					<button onClick={getRandomCard}>Slumpa kort</button>
-				</p>
+			<div className={styles.input_container}>
+				<div className={styles.input}>
+					{/* <label htmlFor="searchInput">Kortnamn: </label> */}
+					<div className={styles["input__search"]}>
+						<input
+							className={styles["input__field"]}
+							type="text"
+							id="searchInput"
+							value={searchValue}
+							onChange={handleInputChange}
+						></input>
+						<button
+							className={styles["input__button"]}
+							onClick={search}
+						>
+							Sök
+						</button>
+					</div>
+					<div className={styles["input__random"]}>
+						<button
+							className={styles["input__button"]}
+							onClick={getRandomCard}
+						>
+							Slumpa kort
+						</button>
+					</div>
+				</div>
 			</div>
 
 			<div>
 				{img !== "" ? (
-					<div className={styles["scryfall__image"]}>
+					<div className={styles["scryfall__card"]}>
 						<img
-							className={styles["scryfall__image--img"]}
+							className={
+								styles["scryfall__card--img"] +
+								(cardInfo
+									? ` ${styles["scryfall__card__opacity"]}`
+									: "")
+							}
 							src={img}
 							alt={scryfall?.cardName}
+							onClick={toggleInfo}
 						/>
-						<h2>{scryfall?.cardName}</h2>
+						<div
+							onClick={toggleInfo}
+							className={
+								styles["scryfall__card__info"] +
+								(!cardInfo
+									? ` ${styles["scryfall__card__show-info"]}`
+									: "")
+							}
+						>
+							<div
+								className={styles["scryfall__card__info__name"]}
+							>
+								{scryfall?.cardName}
+							</div>
+							<div
+								className={styles["scryfall__card__info__type"]}
+							>
+								{scryfall?.cardType}
+							</div>
+							<div
+								className={styles["scryfall__card__info__text"]}
+							>
+								{scryfall?.cardText}
+							</div>
+						</div>
+						<div className={styles["scryfall__card__text"]}>
+							Klicka på bilden för att visa aktuell Oracle-info
+						</div>
 					</div>
 				) : (
 					<p>Loading image...</p>

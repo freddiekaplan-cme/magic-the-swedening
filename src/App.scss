@@ -2,16 +2,72 @@
 @import "./styles/mixins";
 
 body {
+	background-color: #dbd9db;
 	margin: 0;
-	padding: $indent__base;
+
+	font: {
+		family: $font-jost;
+		size: 16px;
+		weight: 500;
+	}
+
+	// @include desktop {
+	// 	@include flexbox($align: center);
+	// }
+
+	#root {
+		@include flexbox($align: center);
+	}
+
+	.container {
+		height: 100%;
+		max-width: 640px;
+		padding: $indent__base;
+
+		@include desktop {
+			padding: $indent__m;
+		}
+	}
 }
 
-.container {
-	// @include flexbox;
-	background-color: antiquewhite;
-	height: 100%;
-	max-width: 640px;
-	@include desktop {
-		margin: 0 auto;
+.translation-container {
+	@include flexbox($align: center);
+}
+
+.translation {
+	background-color: #ede3e4;
+
+	border: {
+		radius: 15px;
+		style: solid;
+		width: 16px;
+	}
+
+	box-sizing: border-box;
+
+	font: {
+		family: $font-garamond;
+		size: 20px;
+	}
+
+	margin-top: $indent__l;
+	padding: $indent__s;
+	max-width: 360px;
+	width: 80vw;
+
+	&__name {
+		font: {
+			size: 24px;
+			weight: 700;
+		}
+	}
+
+	&__type {
+		font-weight: 700;
+		margin: $indent__s 0;
+	}
+
+	&__text {
+		margin-bottom: $indent__m;
 	}
 }
