@@ -10,6 +10,8 @@ interface CardData {
 	oracle_text: string
 	flavor_text: string
 	colors: string
+	set_name: string
+	artist: string
 	image_uris: {
 		normal: string | undefined
 		art_crop: string
@@ -44,6 +46,8 @@ const Scryfall = () => {
 				const cardText = cardData.oracle_text
 				const cardCrop = cardData.image_uris.art_crop
 				const cardFlavor = cardData.flavor_text || ""
+				const cardSet = cardData.set_name
+				const cardArtist = cardData.artist
 				const cardColor =
 					cardData.colors[0] === undefined
 						? "colorless"
@@ -58,6 +62,8 @@ const Scryfall = () => {
 					cardCrop,
 					cardFlavor,
 					cardColor,
+					cardSet,
+					cardArtist,
 				})
 
 				console.log(cardColor)
@@ -101,6 +107,8 @@ const Scryfall = () => {
 				const cardText = cardData.oracle_text
 				const cardFlavor = cardData.flavor_text || ""
 				const cardCrop = cardData.image_uris.art_crop
+				const cardSet = cardData.set_name
+				const cardArtist = cardData.artist
 				const cardColor =
 					cardData.colors[0] === undefined
 						? "colorless"
@@ -115,6 +123,8 @@ const Scryfall = () => {
 					cardCrop,
 					cardFlavor,
 					cardColor,
+					cardSet,
+					cardArtist,
 				})
 
 				console.log(cardColor)

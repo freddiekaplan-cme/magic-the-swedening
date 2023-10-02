@@ -5,6 +5,8 @@ export type ScryfallType = {
 	cardFlavor: string | null
 	cardCrop: string | undefined
 	cardColor: string
+	cardSet: string
+	cardArtist: string
 }
 
 export type ScryfallContextType = {

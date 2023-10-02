@@ -13,7 +13,15 @@ const Footer = () => {
 					<div className={styles["footer__column"]}>
 						<h4>Kortinformation</h4>
 						<div>{scryfall?.cardName}</div>
-						<div>{scryfall?.cardName}</div>
+						<div>{scryfall?.cardSet}</div>
+						<div>{scryfall?.cardArtist} 🖌️</div>
+						<div>
+							<a
+								href={`https://scryfall.com/search?q=${scryfall?.cardName}`}
+							>
+								Scryfall
+							</a>
+						</div>
 					</div>
 					<div className={styles["footer__column"]}>
 						<h4>© 2023 Freddie Kaplan</h4>
