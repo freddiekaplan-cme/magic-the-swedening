@@ -33,6 +33,12 @@ const Scryfall = () => {
 	const [cardInfo, setCardInfo] = useState<boolean>(false)
 	const [searchValue, setSearchValue] = useState<string>("")
 
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+		if (e.key === "Enter") {
+			search()
+		}
+	}
+
 	const getRandomCard = async () => {
 		try {
 			const response = await fetch(
@@ -152,6 +158,7 @@ const Scryfall = () => {
 	const search = () => {
 		if (searchValue) {
 			searchForCard()
+			setSearchValue("")
 		}
 	}
 
@@ -175,6 +182,7 @@ const Scryfall = () => {
 							id="searchInput"
 							value={searchValue}
 							onChange={handleInputChange}
+							onKeyDown={handleKeyDown}
 						></input>
 						<button
 							className={styles["input__button"]}
