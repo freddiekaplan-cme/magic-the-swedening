@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState, useContext } from "react"
 import styles from "./scryfall.module.scss"
 
@@ -25,12 +26,7 @@ interface CardData {
 }
 
 const Scryfall = () => {
-	const { scryfall, setScryfall } = useContext(
-		ScryfallContext,
-	) as ScryfallContextType
-
-	const [img, setImg] = useState<string | undefined>("")
-	const [cardInfo, setCardInfo] = useState<boolean>(false)
+	const { setScryfall } = useContext(ScryfallContext) as ScryfallContextType
 	const [searchValue, setSearchValue] = useState<string>("")
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -54,6 +50,17 @@ const Scryfall = () => {
 				const cardFlavor = cardData.flavor_text || ""
 				const cardSet = cardData.set_name
 				const cardArtist = cardData.artist
+
+				const cardArt =
+					cardData.image_uris &&
+					cardData.image_uris.normal !== undefined
+						? cardData.image_uris.normal
+						: cardData.card_faces &&
+						  cardData.card_faces[0].image_uris &&
+						  cardData.card_faces[0].image_uris.normal !== undefined
+						? cardData.card_faces[0].image_uris.normal
+						: ""
+
 				const cardColor =
 					cardData.colors[0] === undefined
 						? "colorless"
@@ -67,27 +74,11 @@ const Scryfall = () => {
 					cardText,
 					cardCrop,
 					cardFlavor,
+					cardArt,
 					cardColor,
 					cardSet,
 					cardArtist,
 				})
-
-				console.log(cardColor)
-
-				if (
-					cardData.image_uris &&
-					cardData.image_uris.normal !== undefined
-				) {
-					setImg(cardData.image_uris.normal)
-				} else if (
-					cardData.card_faces &&
-					cardData.card_faces[0].image_uris &&
-					cardData.card_faces[0].image_uris.normal !== undefined
-				) {
-					setImg(cardData.card_faces[0].image_uris.normal)
-				} else {
-					setImg("")
-				}
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)
@@ -115,6 +106,17 @@ const Scryfall = () => {
 				const cardCrop = cardData.image_uris.art_crop
 				const cardSet = cardData.set_name
 				const cardArtist = cardData.artist
+
+				const cardArt =
+					cardData.image_uris &&
+					cardData.image_uris.normal !== undefined
+						? cardData.image_uris.normal
+						: cardData.card_faces &&
+						  cardData.card_faces[0].image_uris &&
+						  cardData.card_faces[0].image_uris.normal !== undefined
+						? cardData.card_faces[0].image_uris.normal
+						: ""
+
 				const cardColor =
 					cardData.colors[0] === undefined
 						? "colorless"
@@ -124,6 +126,7 @@ const Scryfall = () => {
 
 				setScryfall({
 					cardName,
+					cardArt,
 					cardType,
 					cardText,
 					cardCrop,
@@ -132,23 +135,6 @@ const Scryfall = () => {
 					cardSet,
 					cardArtist,
 				})
-
-				console.log(cardColor)
-
-				if (
-					cardData.image_uris &&
-					cardData.image_uris.normal !== undefined
-				) {
-					setImg(cardData.image_uris.normal)
-				} else if (
-					cardData.card_faces &&
-					cardData.card_faces[0].image_uris &&
-					cardData.card_faces[0].image_uris.normal !== undefined
-				) {
-					setImg(cardData.card_faces[0].image_uris.normal)
-				} else {
-					setImg("")
-				}
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)
@@ -166,15 +152,10 @@ const Scryfall = () => {
 		setSearchValue(event.target.value)
 	}
 
-	const toggleInfo = (): void => {
-		setCardInfo(!cardInfo)
-	}
-
 	return (
 		<div className={styles.scryfall}>
 			<div className={styles.input_container}>
 				<div className={styles.input}>
-					{/* <label htmlFor="searchInput">Kortnamn: </label> */}
 					<div className={styles["input__search"]}>
 						<input
 							className={styles["input__field"]}
@@ -200,61 +181,6 @@ const Scryfall = () => {
 						</button>
 					</div>
 				</div>
-			</div>
-
-			<div>
-				{img !== "" ? (
-					<div className={styles["scryfall__card"]}>
-						<img
-							className={
-								styles["scryfall__card--img"] +
-								(cardInfo
-									? ` ${styles["scryfall__card__opacity"]}`
-									: "")
-							}
-							src={img}
-							alt={scryfall?.cardName}
-							onClick={toggleInfo}
-						/>
-						<div
-							onClick={toggleInfo}
-							className={
-								styles["scryfall__card__info"] +
-								(!cardInfo
-									? ` ${styles["scryfall__card__show-info"]}`
-									: "")
-							}
-						>
-							<div
-								className={styles["scryfall__card__info__name"]}
-							>
-								{scryfall?.cardName}
-							</div>
-							<div
-								className={styles["scryfall__card__info__type"]}
-							>
-								{scryfall?.cardType}
-							</div>
-							<div
-								className={styles["scryfall__card__info__text"]}
-							>
-								{scryfall?.cardText}
-							</div>
-							<div
-								className={
-									styles["scryfall__card__info__flavor"]
-								}
-							>
-								{scryfall?.cardFlavor || ""}
-							</div>
-						</div>
-						<div className={styles["scryfall__card__text"]}>
-							Klicka på bilden för att visa aktuell Oracle-info
-						</div>
-					</div>
-				) : (
-					<p>Loading image...</p>
-				)}
 			</div>
 		</div>
 	)

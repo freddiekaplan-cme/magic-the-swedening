@@ -1,0 +1,69 @@
+@import "../../App.scss";
+
+.scryfall {
+	font-family: $font-garamond;
+
+	&__card {
+		@include flexbox($align: center);
+
+		margin-top: $indent__l;
+
+		&--img {
+			cursor: pointer;
+			border-radius: 15px;
+			max-width: 360px;
+			width: 80vw;
+		}
+
+		&__info {
+			cursor: pointer;
+			font-size: 20px;
+			margin-top: $indent__m;
+			max-width: 320px;
+			position: absolute;
+			width: 70vw;
+
+			&__name {
+				font: {
+					size: 24px;
+					weight: 700;
+				}
+			}
+
+			&__type {
+				font-weight: 700;
+				margin: $indent__s 0;
+			}
+
+			&__text {
+				margin-bottom: $indent__base;
+			}
+
+			&__flavor {
+				font: {
+					size: 16px;
+					style: italic;
+				}
+				margin-bottom: $indent__s;
+			}
+		}
+
+		&__text {
+			font: {
+				family: $font-jost;
+				size: 14px;
+				weight: 500;
+			}
+
+			margin-top: $indent__xs;
+		}
+
+		&__opacity {
+			opacity: 10%;
+		}
+
+		&__show-info {
+			display: none;
+		}
+	}
+}

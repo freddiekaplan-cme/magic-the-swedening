@@ -4,6 +4,7 @@ import { ScryfallType } from "./utils/types"
 
 import Header from "./components/Header"
 import Scryfall from "./components/Scryfall"
+import CardImage from "./components/CardImage"
 import TranslatedCard from "./components/TranslatedCard"
 import Footer from "./components/Footer"
 
@@ -19,6 +20,7 @@ function App() {
 					<Header />
 					<Scryfall />
 					<TranslatedCard />
+					<CardImage />
 				</div>
 				<Footer />
 			</ScryfallContext.Provider>

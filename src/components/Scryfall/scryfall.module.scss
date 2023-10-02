@@ -1,126 +1,58 @@
 @import "../../App.scss";
 
-.scryfall {
-	font-family: $font-garamond;
-
-	&__card {
+.input_container {
+	@include desktop {
 		@include flexbox($align: center);
+		width: 100%;
+	}
+}
 
-		margin-top: $indent__l;
+.input {
+	@include flexbox($align: flex-start);
 
-		&--img {
-			cursor: pointer;
-			border-radius: 15px;
-			max-width: 360px;
-			width: 80vw;
+	font-family: $font-jost;
+
+	&__button {
+		background-color: $secondary;
+		border: {
+			radius: 4px;
+			style: none;
 		}
-
-		&__info {
-			cursor: pointer;
-			font-size: 20px;
-			margin-top: $indent__m;
-			max-width: 320px;
-			position: absolute;
-			width: 70vw;
-
-			&__name {
-				font: {
-					size: 24px;
-					weight: 700;
-				}
-			}
-
-			&__type {
-				font-weight: 700;
-				margin: $indent__s 0;
-			}
-
-			&__text {
-				margin-bottom: $indent__base;
-			}
-
-			&__flavor {
-				font: {
-					size: 16px;
-					style: italic;
-				}
-				margin-bottom: $indent__s;
-			}
-		}
-
-		&__text {
-			font: {
-				family: $font-jost;
-				size: 14px;
-				weight: 500;
-			}
-
-			margin-top: $indent__xs;
-		}
-
-		&__opacity {
-			opacity: 10%;
-		}
-
-		&__show-info {
-			display: none;
-		}
+		cursor: pointer;
+		font-weight: 700;
+		height: 2rem;
+		padding: $indent__s $indent__m;
 	}
 
-	.input_container {
+	&__field {
+		border: {
+			color: #000;
+			radius: 4px;
+			style: solid;
+			width: 2px;
+		}
+
+		font-size: 18px;
+		height: 1rem;
+		margin-right: $indent__s;
+		max-width: $max__width;
+		padding: $indent__s;
+		width: 100%;
+
 		@include desktop {
-			@include flexbox($align: center);
-			width: 100%;
+			width: $max__width;
 		}
 	}
 
-	.input {
+	&__search {
+		@include flexbox($direction: row);
+
+		width: 100%;
+	}
+
+	&__random {
 		@include flexbox($align: flex-start);
 
-		font-family: $font-jost;
-
-		&__button {
-			background-color: $secondary;
-			border: {
-				radius: 4px;
-				style: none;
-			}
-			cursor: pointer;
-			font-weight: 700;
-			height: 2rem;
-			padding: $indent__s $indent__m;
-		}
-
-		&__field {
-			border: {
-				color: #000;
-				radius: 4px;
-				style: solid;
-				width: 2px;
-			}
-
-			font-size: 18px;
-			height: 1rem;
-			margin-right: $indent__s;
-			max-width: $max__width;
-			padding: $indent__s;
-			width: 100%;
-
-			@include desktop {
-				width: $max__width;
-			}
-		}
-
-		&__search {
-			@include flexbox($direction: row);
-
-			width: 100%;
-		}
-
-		&__random {
-			@include flexbox($align: flex-start);
-
-			margin-top: $indent__s;
-		}
+		margin-top: $indent__s;
 	}
 }

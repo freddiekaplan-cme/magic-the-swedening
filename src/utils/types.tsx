@@ -1,5 +1,6 @@
 export type ScryfallType = {
 	cardName: string
+	cardArt: string
 	cardType: string | null
 	cardText: string | null
 	cardFlavor: string | null
