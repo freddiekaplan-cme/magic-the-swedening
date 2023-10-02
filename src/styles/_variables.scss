@@ -24,4 +24,18 @@ $font-garamond: "Cormorant Garamond", serif;
 // Colors
 
 $primary: #9e6240;
-$accent: #dea47e;
+$secondary: #dea47e;
+$background: #dbd9db;
+$gray: #4a4a4a;
+
+$translation-background: rgba(255, 255, 255, 0.5);
+
+$card-type-colors: (
+	W: #d2c4ae,
+	U: #4d83da,
+	B: #393c34,
+	R: #c24138,
+	G: #4c7f5c,
+	multicolor: #e0c938,
+	colorless: #a6a5b3,
+);

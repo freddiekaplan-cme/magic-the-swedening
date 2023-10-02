@@ -8,13 +8,16 @@ interface CardData {
 	name: string
 	type_line: string
 	oracle_text: string
+	flavor_text: string
+	colors: string
 	image_uris: {
 		normal: string | undefined
-		// art_crop: string | undefined
+		art_crop: string
 	}
 	card_faces: {
 		image_uris: {
 			normal: string | undefined
+			art_crop: string
 		}
 	}[]
 }
@@ -35,12 +38,29 @@ const Scryfall = () => {
 			)
 			const cardData = await response.json()
 
-			if (cardData && cardData.name) {
+			if (cardData) {
 				const cardName = cardData.name
 				const cardType = cardData.type_line
 				const cardText = cardData.oracle_text
+				const cardCrop = cardData.image_uris.art_crop
+				const cardFlavor = cardData.flavor_text || ""
+				const cardColor =
+					cardData.colors[0] === undefined
+						? "colorless"
+						: cardData.colors.length > 1
+						? "multicolor"
+						: cardData.colors[0]
 
-				setScryfall({ cardName, cardType, cardText })
+				setScryfall({
+					cardName,
+					cardType,
+					cardText,
+					cardCrop,
+					cardFlavor,
+					cardColor,
+				})
+
+				console.log(cardColor)
 
 				if (
 					cardData.image_uris &&
@@ -79,9 +99,25 @@ const Scryfall = () => {
 				const cardName = cardData.name
 				const cardType = cardData.type_line
 				const cardText = cardData.oracle_text
-				// const cardCrop = cardData.image_uris.art_crop
+				const cardFlavor = cardData.flavor_text || ""
+				const cardCrop = cardData.image_uris.art_crop
+				const cardColor =
+					cardData.colors[0] === undefined
+						? "colorless"
+						: cardData.colors.length > 1
+						? "multicolor"
+						: cardData.colors[0]
 
-				setScryfall({ cardName, cardType, cardText })
+				setScryfall({
+					cardName,
+					cardType,
+					cardText,
+					cardCrop,
+					cardFlavor,
+					cardColor,
+				})
+
+				console.log(cardColor)
 
 				if (
 					cardData.image_uris &&
@@ -185,6 +221,13 @@ const Scryfall = () => {
 								className={styles["scryfall__card__info__text"]}
 							>
 								{scryfall?.cardText}
+							</div>
+							<div
+								className={
+									styles["scryfall__card__info__flavor"]
+								}
+							>
+								{scryfall?.cardFlavor || ""}
 							</div>
 						</div>
 						<div className={styles["scryfall__card__text"]}>

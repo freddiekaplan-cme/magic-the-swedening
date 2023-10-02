@@ -36,7 +36,15 @@
 			}
 
 			&__text {
-				margin-bottom: $indent__m;
+				margin-bottom: $indent__base;
+			}
+
+			&__flavor {
+				font: {
+					size: 16px;
+					style: italic;
+				}
+				margin-bottom: $indent__s;
 			}
 		}
 
@@ -72,7 +80,7 @@
 		font-family: $font-jost;
 
 		&__button {
-			background-color: $accent;
+			background-color: $secondary;
 			border: {
 				radius: 4px;
 				style: none;

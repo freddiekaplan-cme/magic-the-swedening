@@ -18,26 +18,47 @@ function App() {
 				<div className="container">
 					<Header />
 					<Scryfall />
-
 					{scryfall && (
 						<div className="translation-container">
-							<div className="translation">
-								<div className="translation__name">
-									<TranslateText
-										textToTranslate={scryfall.cardName}
+							<div
+								className={`translation translation__color--${scryfall.cardColor}`}
+							>
+								<div className="translation__background">
+									<div className="translation__name">
+										<TranslateText
+											textToTranslate={scryfall.cardName}
+										/>
+									</div>
+								</div>
+								<div>
+									<img
+										className="translation__art-crop"
+										src={scryfall.cardCrop}
 									/>
 								</div>
-								{/* <div className="tanslate__type__border"> */}
-								<div className="translation__type">
-									<TranslateText
-										textToTranslate={scryfall.cardType}
-									/>
+								<div className="translation__background">
+									<div className="translation__type">
+										<TranslateText
+											textToTranslate={scryfall.cardType}
+										/>
+									</div>
 								</div>
-								{/* </div> */}
-								<div className="translation__text">
-									<TranslateText
-										textToTranslate={scryfall.cardText}
-									/>
+								<div className="translation__background translation__text__background">
+									<div className="translation__text">
+										<TranslateText
+											textToTranslate={scryfall.cardText}
+										/>
+									</div>
+									{scryfall.cardFlavor !== "" && (
+										<div className="translation__flavor">
+											<hr className="translation__line"></hr>
+											<TranslateText
+												textToTranslate={
+													scryfall.cardFlavor
+												}
+											/>
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
