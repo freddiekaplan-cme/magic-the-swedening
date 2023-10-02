@@ -12,7 +12,7 @@ const CardImage = () => {
 	}
 
 	return (
-		<div>
+		<>
 			{scryfall?.cardArt !== "" ? (
 				<div className={styles["scryfall__card"]}>
 					<img
@@ -55,7 +55,7 @@ const CardImage = () => {
 			) : (
 				<p>Loading image...</p>
 			)}
-		</div>
+		</>
 	)
 }
 

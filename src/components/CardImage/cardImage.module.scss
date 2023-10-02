@@ -6,8 +6,6 @@
 	&__card {
 		@include flexbox($align: center);
 
-		margin-top: $indent__l;
-
 		&--img {
 			cursor: pointer;
 			border-radius: 15px;

@@ -4,6 +4,12 @@
 	}
 }
 
+@mixin desktop-large {
+	@media screen and (min-width: $desktop-large) {
+		@content;
+	}
+}
+
 @mixin flexbox($direction: column, $align: center) {
 	align-items: $align;
 	display: flex;

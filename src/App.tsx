@@ -19,6 +19,8 @@ function App() {
 				<div className="container">
 					<Header />
 					<Scryfall />
+				</div>
+				<div className="cards">
 					<TranslatedCard />
 					<CardImage />
 				</div>

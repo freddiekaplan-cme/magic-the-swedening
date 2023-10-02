@@ -24,4 +24,15 @@ body {
 			padding: $indent__m;
 		}
 	}
+
+	.cards {
+		@include flexbox($align: center, $direction: column);
+
+		gap: $indent__l;
+		margin-top: $indent__l;
+
+		@include desktop-large {
+			@include flexbox($align: center, $direction: row);
+		}
+	}
 }

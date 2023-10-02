@@ -15,6 +15,7 @@ $max__width: 400px;
 // BreakPoints
 
 $desktop: 640px;
+$desktop-large: 760px;
 
 // Fonts
 
@@ -23,9 +24,11 @@ $font-garamond: "Cormorant Garamond", serif;
 
 // Colors
 
-$primary: #9e6240;
-$secondary: #dea47e;
-$background: #dbd9db;
+// $primary: #9e6240;
+// $secondary: #dea47e;
+$primary: #4d83da;
+$secondary: #e0c938;
+$background: #fbfaf3;
 $gray: #4a4a4a;
 
 $translation-background: rgba(255, 255, 255, 0.5);
