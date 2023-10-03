@@ -3,10 +3,10 @@
 .header {
 	@include flexbox($align: center);
 	color: $primary;
+	font-family: $font-beleren;
 
 	&__title {
 		font: {
-			family: $font-garamond;
 			size: 64px;
 			weight: 700;
 		}
@@ -16,7 +16,6 @@
 
 		&__subtitle {
 			font: {
-				family: $font-garamond;
 				size: 32px;
 				weight: 700;
 			}

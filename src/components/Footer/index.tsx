@@ -11,15 +11,26 @@ const Footer = () => {
 			<div className={styles["footer"]}>
 				<div className={styles["footer__container"]}>
 					<div className={styles["footer__column"]}>
-						<h4>Kortinformation</h4>
-						<div>{scryfall?.cardName}</div>
-						<div>{scryfall?.cardSet}</div>
-						<div>{scryfall?.cardArtist} 🖌️</div>
+						<h4>Scryfall-info</h4>
 						<div>
 							<a
 								href={`https://scryfall.com/search?q=${scryfall?.cardName}`}
 							>
-								Scryfall
+								{scryfall?.cardName}
+							</a>
+						</div>
+						<div>
+							<a
+								href={`https://scryfall.com/search?q=set:${scryfall?.cardSet}`}
+							>
+								{scryfall?.cardSet}
+							</a>
+						</div>
+						<div>
+							<a
+								href={`https://scryfall.com/search?q=artist:"${scryfall?.cardArtist}"`}
+							>
+								{scryfall?.cardArtist} 🖌️
 							</a>
 						</div>
 					</div>

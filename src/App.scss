@@ -1,6 +1,15 @@
 @import "./styles/variables";
 @import "./styles/mixins";
 
+@font-face {
+	font-family: "Beleren";
+	src:
+		url("../src/assets/fonts/beleren/beleren.woff") format("woff"),
+		url("../src/assets/fonts/beleren/beleren.woff2") format("woff");
+}
+
+$font-beleren: "Beleren", serif;
+
 body {
 	background-color: $background;
 	margin: 0;
@@ -35,4 +44,11 @@ body {
 			@include flexbox($align: center, $direction: row);
 		}
 	}
+}
+
+@font-face {
+	font-family: "Beleren";
+	src:
+		url("./fonts/beleren/beleren.woff") format("woff"),
+		url("./fonts/beleren/beleren.woff2") format("woff");
 }

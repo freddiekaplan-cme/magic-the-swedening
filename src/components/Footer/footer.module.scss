@@ -3,7 +3,16 @@
 .footer {
 	@include flexbox($align: center);
 
+	a,
+	a:visited,
+	a:hover,
+	a:active {
+		color: $background;
+		text-decoration: none;
+	}
+
 	background-color: $primary;
+	color: $background;
 	margin-top: $indent__xl;
 	padding: $indent__l 0 $indent__xl 0;
 	width: 100%;
@@ -26,14 +35,7 @@
 		h4,
 		div {
 			margin-bottom: 0;
-			padding: 0 $indent__l;
-		}
-
-		a,
-		a:visited,
-		a:active {
-			color: #000;
-			text-decoration: none;
+			padding: 0 $indent__xl;
 		}
 
 		@include desktop {

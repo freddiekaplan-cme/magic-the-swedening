@@ -1,5 +1,10 @@
+// Fonts
+
 @import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap");
+
+$font-jost: "Jost", sans-serif;
+$font-garamond: "Cormorant Garamond", serif;
 
 // Spacing
 
@@ -17,15 +22,8 @@ $max__width: 400px;
 $desktop: 640px;
 $desktop-large: 760px;
 
-// Fonts
-
-$font-jost: "Jost", sans-serif;
-$font-garamond: "Cormorant Garamond", serif;
-
 // Colors
 
-// $primary: #9e6240;
-// $secondary: #dea47e;
 $primary: #4d83da;
 $secondary: #e0c938;
 $background: #fbfaf3;
