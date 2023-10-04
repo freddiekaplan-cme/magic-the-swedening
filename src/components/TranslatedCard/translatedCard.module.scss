@@ -44,11 +44,11 @@
 	&__name {
 		font: {
 			family: $font-beleren;
-			size: 20px;
+			size: 18px;
 		}
 
-		padding: calc($indent__xs / 2);
-		padding-left: calc($indent__s / 2);
+		padding: $indent__xs calc($indent__xs / 2) calc($indent__xs / 2)
+			calc($indent__s / 2);
 	}
 
 	&__art-crop {
@@ -57,7 +57,10 @@
 	}
 
 	&__type {
-		font-family: $font-beleren;
+		font: {
+			family: $font-beleren;
+			size: 14px;
+		}
 		padding: $indent__xs;
 		padding-left: calc(($indent__s / 2) + $indent__s);
 	}
