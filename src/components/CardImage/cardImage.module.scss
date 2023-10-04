@@ -9,7 +9,7 @@
 		&--img {
 			cursor: pointer;
 			border: solid #000 1px;
-			border-radius: 15px;
+			border-radius: $border-radius;
 			max-width: 360px;
 			width: 80vw;
 		}

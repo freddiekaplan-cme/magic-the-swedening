@@ -29,8 +29,8 @@ function App() {
 	return (
 		<>
 			<ScryfallContext.Provider value={{ scryfall, setScryfall }}>
+				<Header />
 				<div className="container">
-					<Header />
 					<Scryfall setShowAnimationTrue={setShowAnimationTrue} />
 				</div>
 				<Lottie

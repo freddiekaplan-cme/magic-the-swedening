@@ -163,6 +163,10 @@ const Scryfall: React.FC<ScryfallProps> = ({ setShowAnimationTrue }) => {
 	return (
 		<div className={styles.scryfall}>
 			<div className={styles.input_container}>
+				<p>
+					Översätt Magic the Gathering-kort till svenska! Sök på
+					kortnamn eller slumpa fram ett kort.
+				</p>
 				<div className={styles.input}>
 					<div className={styles["input__search"]}>
 						<input

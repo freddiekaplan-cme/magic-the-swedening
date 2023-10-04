@@ -10,10 +10,10 @@ const Header = () => {
 				</h3>
 			</div>
 			<div className={styles["header__paragraph"]}>
-				<p>
+				{/* <p>
 					Översätt Magic the Gathering-kort till svenska! Sök på
 					kortnamn eller slumpa fram ett kort.
-				</p>
+				</p> */}
 			</div>
 		</>
 	)

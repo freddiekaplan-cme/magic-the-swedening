@@ -22,6 +22,10 @@ $max__width: 400px;
 $desktop: 640px;
 $desktop-large: 760px;
 
+// Card Border Radius
+
+$border-radius: 18px;
+
 // Colors
 
 $primary: #4d83da;
@@ -33,10 +37,10 @@ $translation-background: rgba(255, 255, 255, 0.5);
 
 $card-type-colors: (
 	W: #d2c4ae,
-	U: #4d83da,
+	U: $primary,
 	B: #393c34,
 	R: #c24138,
 	G: #4c7f5c,
-	multicolor: #e0c938,
+	multicolor: $secondary,
 	colorless: #a6a5b3,
 );

@@ -5,6 +5,12 @@
 	color: $primary;
 	font-family: $font-beleren;
 
+	padding: 32px;
+	background-color: $primary;
+	color: $secondary;
+	width: 100%;
+	//   margin-bottom: 32px;
+
 	&__title {
 		font: {
 			size: 64px;
