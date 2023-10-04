@@ -43,6 +43,22 @@ body {
 		@include desktop-large {
 			@include flexbox($align: center, $direction: row);
 		}
+
+		&__hidden {
+			display: none;
+		}
+	}
+}
+
+.animation {
+	max-width: 50vw;
+
+	&__hidden {
+		display: none;
+	}
+
+	@include desktop {
+		max-width: 25vw;
 	}
 }
 

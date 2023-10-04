@@ -5,6 +5,10 @@ import styles from "./scryfall.module.scss"
 import { ScryfallContextType } from "../../utils/types"
 import { ScryfallContext } from "../../utils/contexts"
 
+interface ScryfallProps {
+	setShowAnimationTrue: () => void
+}
+
 interface CardData {
 	name: string
 	type_line: string
@@ -25,7 +29,7 @@ interface CardData {
 	}[]
 }
 
-const Scryfall = () => {
+const Scryfall: React.FC<ScryfallProps> = ({ setShowAnimationTrue }) => {
 	const { setScryfall } = useContext(ScryfallContext) as ScryfallContextType
 	const [searchValue, setSearchValue] = useState<string>("")
 
@@ -79,6 +83,8 @@ const Scryfall = () => {
 					cardSet,
 					cardArtist,
 				})
+
+				setShowAnimationTrue()
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)
@@ -135,6 +141,8 @@ const Scryfall = () => {
 					cardSet,
 					cardArtist,
 				})
+
+				setShowAnimationTrue()
 			}
 		} catch (error) {
 			console.error("Error fetching data:", error)

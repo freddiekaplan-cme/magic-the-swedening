@@ -1,12 +1,6 @@
 import styles from "./header.module.scss"
 
-// import { useContext } from "react"
-// import { ScryfallContext } from "../../utils/contexts"
-// import { ScryfallContextType } from "../../utils/types"
-
 const Header = () => {
-	// const { scryfall } = useContext(ScryfallContext) as ScryfallContextType
-
 	return (
 		<>
 			<div className={styles.header}>
